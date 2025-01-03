@@ -1,3 +1,5 @@
+import 'dotenv/config' // Load environment variables
+
 // function to get environment variables with default values if not set in .env file
 
 export const getEnv = (key: string, defaultValue?: string): string => {

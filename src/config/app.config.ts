@@ -1,3 +1,9 @@
+import 'dotenv/config' // Load environment variables
+
+import { config as dotenvConfig } from 'dotenv'
+
+dotenvConfig() // Load environment variables from .env file
+
 import { getEnv } from '../common/utils/get-env'
 
 // Declaring a function that returns an object with application configurations. This allows for a centralized and reusable configuration setup. so we use this not to access the env directly
