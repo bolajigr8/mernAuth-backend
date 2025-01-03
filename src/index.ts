@@ -64,7 +64,7 @@ app.use(errorHandler)
 //   await connectDB()
 // })
 
-app.listen(process.env.PORT || config.PORT, async () => {
+app.listen(process.env.PORT || 3000, async () => {
   console.log(
     `Server listening on port ${process.env.PORT || config.PORT} in ${
       config.NODE_ENV
