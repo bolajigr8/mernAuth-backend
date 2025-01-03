@@ -1,25 +1,26 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "A backend project for Node.js with TypeScript.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --files src/index.ts",
-    "build": "tsc && cp ./package.json ./dist",
+    "build": "tsc",
     "start": "node dist/index.js"
   },
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.2",
+    "mongoose": "^8.9.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "qrcode": "^1.5.4",
@@ -47,5 +48,9 @@
     "@types/winston": "^2.4.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
   }
 }
