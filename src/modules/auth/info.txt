@@ -1,0 +1,58 @@
+Workflow Overview
+1. Request Handling:
+
+When a POST /register request is made, it is routed to the register method of the AuthController.
+
+2. Controller's Role:
+
+The AuthController processes the request. In this case (for initial register), it sends a success response, but in a real-world scenario, it might validate the request data and call methods in the AuthService to register the user.
+
+3. Service's Role:
+
+The AuthService handles the core business logic, such as saving user data to the database, hashing passwords, or generating tokens.
+
+4. Route Setup:
+
+The auth.routes.ts file defines the route and connects it to the corresponding controller method.
+
+5. Integration with Main App:
+
+The authRoutes is typically imported and added to the main Express app using app.use('/auth', authRoutes);. This makes all authentication routes accessible under the /auth prefix.
+
+
+
+ // to validate the req.body body to make sure the user sent correct body, we will be making use of zod
+
+
+
+ // Differences between the auth controller and the auth service
+
+ The Auth Controller is primarily responsible for managing the interaction between the client and the server. It handles incoming HTTP requests, extracts the necessary data, and ensures the correct response is sent back to the client. For example, when a user submits a registration or login request, the controller processes the request, validates it, and delegates the core logic to the service layer. It is also responsible for ensuring proper HTTP status codes and error messages are returned in case of failures, keeping the application user-friendly and predictable.
+
+On the other hand, the Auth Service focuses on implementing the business logic related to authentication. This includes operations such as hashing passwords, validating user credentials, and generating authentication tokens. The service interacts directly with the database or models to perform these tasks. For instance, during a login request, the service verifies the user’s credentials, checks the hashed password, and generates a JWT token if the authentication succeeds. The service layer is designed to be reusable, meaning its functions can be called not only by the controller but also by other parts of the application, such as background jobs or event listeners.
+
+The separation between the controller and service is crucial for maintaining a clean and modular architecture. The controller handles the request/response flow, ensuring the application is responsive to client needs, while the service focuses on core functionality, ensuring business logic is robust and efficient. This division makes the application easier to test, maintain, and extend over time. By delegating specific responsibilities to each layer, you achieve a clear structure that promotes better development practices.
+
+
+
+
+ // the refresh token and access token explanations 
+
+
+First, when a user requests a token refresh, the refresh token sent by the client is verified. The refreshToken method in the authService verifies the token using a secret key to ensure its authenticity. The token’s payload is decoded, and if the payload is missing, it indicates the token is invalid, resulting in an exception being thrown. If the payload contains valid data, the session associated with the user (identified by the sessionId in the payload) is fetched from the database. The method then checks if the session exists and if it has expired. If the session is either missing or expired, an exception is thrown.
+
+Once the session is validated, the method determines if the session is close to expiring, within the next 24 hours. If the session needs refreshing, its expiration date is updated using the configured expiration time. After updating the session, a new refresh token is generated and signed, incorporating the session ID into the payload. Simultaneously, an access token is created using the user's ID and session ID. Both tokens are then returned to the calling code.
+
+On the server side, the route handler for refreshToken handles the incoming request. It first checks if a refresh token is present in the request cookies. If the refresh token is missing, it throws an error. The route handler then calls the refreshToken method of the authService to retrieve the new accessToken and, if applicable, a new refreshToken. If a new refresh token is generated, it is set in the response cookies, ensuring that the client has the updated token. The access token is also set in the cookies, and the server responds with a success message, confirming the refresh process was successful.
+
+This workflow ensures that the session is valid, prevents unauthorized access, and securely refreshes the tokens used for authentication, maintaining a seamless user experience.
+
+
+
+
+
+
+
+
+
+

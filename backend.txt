@@ -1,0 +1,181 @@
+npm init
+# Install Project Dependencies
+
+To set up the project, run the following commands to install all required dependencies and devDependencies.
+
+### Install Dependencies
+
+```bash
+npm install bcrypt@^5.1.1 \
+cookie-parser@^1.4.7 \
+cors@^2.8.5 \
+date-fns-tz@^3.2.0 \
+dotenv@^16.4.5 \
+express@^4.21.1 \
+jsonwebtoken@^9.0.2 \
+mongoose@^8.8.0 \
+passport@^0.7.0 \
+passport-jwt@^4.0.1 \
+qrcode@^1.5.4 \
+resend@^4.0.1-alpha.0 \
+speakeasy@^2.0.0 \
+zod@^3.23.8
+```
+
+### Install Dev Dependencies
+
+Use the following command to install all the required **development dependencies**:
+
+```bash
+npm install -D @types/bcrypt@^5.0.2 \
+@types/cookie-parser@^1.4.7 \
+@types/cors@^2.8.17 \
+@types/dotenv@^8.2.3 \
+@types/express@^5.0.0 \
+@types/jsonwebtoken@^9.0.7 \
+@types/mongoose@^5.11.97 \
+@types/passport@^1.0.17 \
+@types/passport-jwt@^4.0.1 \
+@types/qrcode@^1.5.5 \
+@types/speakeasy@^2.0.10 \
+ts-node-dev@^2.0.0 \
+typescript@^5.6.3
+```
+
+### Initialize TypeScript
+
+To initialize TypeScript in your project, run the following command:
+
+```bash
+npx tsc --init
+```
+
+-- INFO ON DEPENDENCIES
+
+1. bcrypt@^5.1.1
+Purpose: For hashing passwords to enhance security. It hashes user passwords before storing them in the database and verifies passwords during authentication.
+Use Case: Password encryption and verification.
+2. cookie-parser@^1.4.7
+Purpose: Parses cookies attached to the client request object. It makes it easier to manage cookies in an Express application.
+Use Case: Reading and managing cookies for session or state management.
+3. cors@^2.8.5
+Purpose: Enables Cross-Origin Resource Sharing (CORS), allowing your API to be accessed from different domains.
+Use Case: Allow frontend clients (e.g., React, Vue) hosted on other domains to interact with your backend.
+4. date-fns-tz@^3.2.0
+Purpose: Provides utilities for handling time zones when working with dates.
+Use Case: Managing and formatting dates with proper timezone awareness.
+5. dotenv@^16.4.5
+Purpose: Loads environment variables from a .env file into process.env.
+Use Case: Managing sensitive configurations like API keys, database URLs, and secrets.
+6. express@^4.21.1
+Purpose: The web application framework used to build the backend. It simplifies handling routes, middleware, and HTTP requests.
+Use Case: Core framework for your server-side application.
+7. jsonwebtoken@^9.0.2
+Purpose: Implements JSON Web Tokens (JWT) for secure user authentication.
+Use Case: Token-based authentication for protecting routes and user sessions.
+8. mongoose@^8.8.0
+Purpose: An Object Data Modeling (ODM) library for MongoDB. It simplifies interactions with MongoDB by providing schema-based solutions.
+Use Case: Database modeling and interaction with MongoDB.
+9. passport@^0.7.0
+Purpose: Middleware for authentication. It supports various authentication strategies like local, JWT, OAuth, etc.
+Use Case: Implementing authentication in your app.
+10. passport-jwt@^4.0.1
+Purpose: A Passport strategy for authenticating with a JSON Web Token (JWT).
+Use Case: Combining Passport with JWT for user authentication.
+11. qrcode@^1.5.4
+Purpose: Generates QR codes as images or data URIs.
+Use Case: Creating QR codes for sharing data like links or tokens.
+12. resend@^4.0.1-alpha.0
+Purpose: Used for sending emails via the Resend API.
+Use Case: Sending transactional emails like verification or password resets.
+13. speakeasy@^2.0.0
+Purpose: For generating one-time passcodes (OTPs) and managing Two-Factor Authentication (2FA).
+Use Case: Enhancing security with 2FA.
+14. zod@^3.23.8
+Purpose: A TypeScript-first schema validation library.
+Use Case: Validating and parsing data, such as request payloads, for correctness.
+
+-- EXPLANANTION OF SCRIPTS IN PACKAGE.JSON
+
+"dev": "ts-node-dev --files src/index.ts"
+Purpose: Runs the application in development mode with TypeScript.
+Explanation:
+ts-node-dev: A development tool that combines ts-node (TypeScript execution) with automatic restarts when files change.
+--files: Ensures all files are monitored for changes.
+src/index.ts: The entry point for the application in the src folder.
+This script runs the application without needing to compile TypeScript files into JavaScript, saving development time.
+Why:
+Enables a fast development workflow with live reload functionality.
+Automatically applies changes without needing to manually stop and restart the server.
+3. "build": "tsc && cp ./package.json ./dist"
+Purpose: Builds the application for production by transpiling TypeScript to JavaScript.
+Explanation:
+tsc: Runs the TypeScript compiler (tsc command), transpiling all .ts files into .js files in the dist directory (as defined in the tsconfig.json).
+cp ./package.json ./dist: Copies the package.json file to the dist directory.
+This is useful for deploying the app or installing production dependencies within the dist folder.
+Why:
+Prepares the code for deployment by converting TypeScript into JavaScript.
+Ensures the production environment has access to a package.json for dependency installation or deployment scripts.
+4. "start": "node dist/index.js"
+Purpose: Starts the application in production mode.
+Explanation:
+node dist/index.js: Uses Node.js to execute the compiled JavaScript entry point located in the dist directory.
+This assumes that the build script has already been run, so the dist/index.js file exists.
+Why:
+Runs the production-ready version of the application.
+This script is lightweight and efficient, as it does not involve development tools like ts-node-dev.
+Summary of the Workflow:
+Development:
+
+Use npm run dev to develop the application with live reload and TypeScript execution.
+Build:
+
+Run npm run build to transpile TypeScript into JavaScript and prepare the dist folder for production.
+Production:
+
+Use npm start to run the compiled production code.
+
+
+
+
+
+Thunder Client is a powerful HTTP client extension for Visual Studio Code (VS Code) that simplifies API testing directly within your editor. It offers a lightweight, user-friendly alternative to Postman, which is particularly useful for developers who prefer working within the VS Code environment rather than switching to a separate application.
+
+- common holds the utilities 
+ - look at the folder structure
+
+ --- set up the database connection
+
+
+ MongoDB 
+ micbol, Michael2001
+ mongodb+srv://micbol:<db_password>@mern-auth-cluster.8yepa.mongodb.net/
+
+ --- the error setup can be used for error setup in any backend
+ --- after error, modules/auth setup for logi, register, two factor auth and so on
+ --- then models for the database, then continue with the register
+ --- and in creating that, set up needed utilities, 
+ --- finished the register logic in the authservice, the password is not returning after success and the secret
+ --- now for the login, then refresh token and now verify emails
+ --- to send emails to user, we use resend , get the resend api key and store in the .env also the mailer email, create domian so we can send to other emails and in ap.config, so we can get the env 
+ also check the mailers folder for files needed
+ read the docs when you login for better understanding
+
+
+
+ for validations of requests, we use zod defined in the validations folder
+
+--- passport-jwt
+
+A Passport strategy for authenticating with a JSON Web Token.
+
+This module lets you authenticate endpoints using a JSON web token. It is intended to be used to secure RESTful endpoints without sessions.
+check docs: passport jwt  --- we used this in authenticating our session api
+
+
+--- for two factor auth (2fa)  -- speakeasy was used and also using qrcode for qrcodeimage, check modules/mfa
+--- code beautify to convert the qrcodeimage url into image --- copy from the result of the mfa setup
+
+--- in testing the mfa verify endpoint, copy the qrcodeimage url from mfa setup and go to code beautify to show the image, then u scan to get the the qrcode and then use in for mfa verify
+
+to get the 6 digit code, use google authenticator app on your phone to scan the qr code image
