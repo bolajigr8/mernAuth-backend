@@ -59,7 +59,16 @@ app.use(`${BASE_PATH}/session`, authenticateJWT, sessionRoutes)
 app.use(errorHandler)
 
 // Starting the server on the configured port (`config.PORT`). The callback function logs a message indicating the server is running and the current environment.
-app.listen(config.PORT, async () => {
-  console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`)
+// app.listen(config.PORT, async () => {
+//   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`)
+//   await connectDB()
+// })
+
+app.listen(process.env.PORT || config.PORT, async () => {
+  console.log(
+    `Server listening on port ${process.env.PORT || config.PORT} in ${
+      config.NODE_ENV
+    }`
+  )
   await connectDB()
 })
